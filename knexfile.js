@@ -15,3 +15,7 @@ module.exports = {
     charset: "utf8",
   },
 };
+
+
+// run [npx knex migrate:latest] to load tables after creating the instockmp2 database.
+// run [npx knex seed: run] to load seeds to database.

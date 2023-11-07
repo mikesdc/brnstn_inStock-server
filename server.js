@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const uuidv4 = require("uuid");
 
 // setting up env
 
@@ -19,11 +18,18 @@ app.use(express.static('public'));
 
 // setting up routes
 
-const videosRoutes = require("./routes/warehouse");
-app.use("/warehouse", warehouseRoutes);
+const warehousesRoutes = require("./routes/warehouses");
+app.use("/warehouses", warehousesRoutes);
+
+const inventoriesRoutes = require("./routes/inventories");
+app.use("/inventories", inventoriesRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the InStock API");
+});
+
+app.use((req, res) => {
+  res.send("This is not a valid route. try <b>/warehouses</b> or <b>/inventories</b>");
 });
 
 app.listen(PORT, () => {
