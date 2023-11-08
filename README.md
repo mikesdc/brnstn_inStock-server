@@ -1,4 +1,4 @@
-# Instock BrainStation Project - Frontend
+# Instock BrainStation Project - Backend/Server
 
 ## Instock BrainStation Project - Frontend
 https://github.com/saksham1236/brnstn_instock-mp2-frontend
