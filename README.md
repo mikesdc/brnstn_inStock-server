@@ -11,6 +11,10 @@ Jira Board:
 https://brainstationeducation.atlassian.net/jira/software/c/projects/MP2/boards/524
 
 
+Figma File:
+https://www.figma.com/file/qLdwhUjqq5bKxoNYZ6v5Ze/U---InStock-Mockups?type=design&node-id=1196-0&mode=design
+
+
 Collaborators: Arjun, Micheal, Kate, Saksham
 
 
