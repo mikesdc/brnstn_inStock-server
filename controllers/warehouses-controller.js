@@ -30,7 +30,7 @@ const singleWarehouse = (req, res) => {
     }
 
     //Response 200
-    res.status(200).json(warehouseData[0]);
+    res.status(200).json(warehousesFound[0]);
   })
 
   //Catching errors, Gotta catch em all 🐉
