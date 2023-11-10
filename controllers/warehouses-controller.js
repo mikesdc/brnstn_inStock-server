@@ -11,7 +11,7 @@ const index = (_req, res) => {
 };
 
 /**
- * Returns Json data for one warehouse in requested in req.params.warehouse_id : (warehouses/warehouse_id)
+ * Returns Json data for one warehouse in requested in req.params.warehouse_id : (/warehouse_id)
  * @param {AxiosRequest} req 
  * @param {AxiosResponse} res
  * @returns {{id: number, warehouse_name: String, address: String, country: String, contact_name: String, contact_position: String, contact_phone: String,contact_email: String,created_at: EpochTimeStamp, updated_at: EpochTimeStamp} }
@@ -30,8 +30,7 @@ const singleWarehouse = (req, res) => {
     }
 
     //Response 200
-    const warehouseData = warehousesFound[0];
-    res.status(200).json(warehouseData);
+    res.status(200).json(warehouseData[0]);
   })
 
   //Catching errors, Gotta catch em all 🐉
@@ -43,7 +42,7 @@ const singleWarehouse = (req, res) => {
 }
 
 /**
- * Returns Json Array data for one warehouse inventory in requested in req.params.warehouse_id : (warehouses/warehouse_id)
+ * Returns Json Array data for one warehouse inventory in requested in req.params.warehouse_id/inventory : (/warehouse_id/inventory)
  * @param {AxiosRequest} req 
  * @param {AxiosResponse} res
  * @returns {[{"id": number(Primary Key),"warehouse_id": number(Foreign Key),"item_name": String, "description": String,"category": String, status : "Out of Stock" | "In Stock" , quantity": number,"created_at": EpochTimeStamp,"updated_at": EpochTimeStamp}, ...]}
@@ -61,8 +60,7 @@ const singleWarehouseInventory = (req, res) => {
     }
 
     //Response 200
-    const inventoryData = inventoryFound;
-    res.status(200).json(inventoryData);
+    res.status(200).json(inventoryFound);
   })
 
   //Catching errors, Gotta catch em all 🐉
