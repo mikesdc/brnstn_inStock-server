@@ -15,7 +15,7 @@ https://www.figma.com/file/qLdwhUjqq5bKxoNYZ6v5Ze/U---InStock-Mockups?type=desig
 
 ## Collaborators: Arjun, Micheal, Kate, Saksham
 
-<img src = "https://procoders.tech/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2022/03/1_82gzUS7f_RiDf75b5FzRMQ.jpeg.webp" alt = "meme">
+<img src = "https://seranking.com/blog/wp-content/uploads/2021/01/404_01-min.jpg" alt = "meme">
 
 ## Stop it and git some help
 
