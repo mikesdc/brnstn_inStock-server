@@ -20,11 +20,11 @@ const singleInventoryItem = (req, res) => {
     .then((itemFound) => {
 
       // If item not found
-      // if (itemFound.length === 0) {
-      //   return res
-      //     .status(404)
-      //     .json({ message: `Cannot find inventory item with id: ${req.params.id}` })
-      // }
+      if (itemFound.length === 0) {
+        return res
+          .status(500)
+          .json({ message: `Cannot find inventory item with id: ${req.params.id}` })
+      }
 
       // Response 200
       res.status(200).json(itemFound);
