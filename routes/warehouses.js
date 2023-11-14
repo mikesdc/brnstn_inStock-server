@@ -8,6 +8,6 @@ router.route("/").get(warehousesController.index);
 
 router.route("/:warehouse_id").get(warehousesController.singleWarehouse);
 
-router.route("/:warehouse_id/inventory").get(warehousesController.singleWarehouseInventory);
+router.route("/:warehouse_id/inventories").get(warehousesController.singleWarehouseInventory);
 
 module.exports = router;

@@ -15,8 +15,13 @@ const index = (_req, res) => {
  */
 const singleInventoryItem = (req, res) => {
   // Inventory data knex query
+  const itemId = req.params.id;
+
   knex('inventories')
-    .where({ id: req.params.id })
+    .where('inventories.id', itemId)
+    .join('warehouses', 'inventories.warehouse_id', 'warehouses.id')
+    .select('inventories.*', 'warehouses.warehouse_name')
+
     .then((itemFound) => {
 
       // If item not found
