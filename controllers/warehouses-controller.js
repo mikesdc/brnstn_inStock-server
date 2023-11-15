@@ -42,7 +42,7 @@ const singleWarehouse = (req, res) => {
 }
 
 /**
- * Returns Json Array data for one warehouse inventory in requested in req.params.warehouse_id/inventory : (/warehouse_id/inventory)
+ * Returns Json Array data for one warehouse inventory in requested in req.params.warehouse_id/inventories : (/warehouse_id/inventories)
  * @param {AxiosRequest} req 
  * @param {AxiosResponse} res
  * @returns {[{"id": number(Primary Key),"warehouse_id": number(Foreign Key),"item_name": String, "description": String,"category": String, status : "Out of Stock" | "In Stock" , quantity": number,"created_at": EpochTimeStamp,"updated_at": EpochTimeStamp}, ...]}
