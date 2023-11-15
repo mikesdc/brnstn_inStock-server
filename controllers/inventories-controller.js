@@ -1,7 +1,11 @@
 const knex = require('knex')(require('../knexfile'));
 
 const index = (_req, res) => {
-  knex('inventories')
+  knex
+    .select('inventories.*', 'warehouses.warehouse_name')
+    .from('inventories')
+    .join('warehouses', 'inventories.warehouse_id', 'warehouses.id')
+
     .then((data) => {
       res.status(200).json(data);
     })
@@ -9,6 +13,7 @@ const index = (_req, res) => {
       res.status(400).send(`Error retrieving inventories: ${err}`)
     );
 };
+
 /**
  * Returns json data for one inventory item requested in req.params.id : (/inventories/:id)
  * 
