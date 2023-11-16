@@ -71,9 +71,22 @@ const singleWarehouseInventory = (req, res) => {
   })
 }
 
+const deleteWarehouse = (req, res) => {
+  knex("warehouses")
+    .where({ id: req.params.id })
+    .del()
+    .then(data => {
+      res.sendStatus(204);
+    })
+    .catch(() =>
+      res.status(404)
+    );
+}
+
 
 module.exports = {
   index,
   singleWarehouse,
-  singleWarehouseInventory
+  singleWarehouseInventory,
+  deleteWarehouse
 }
