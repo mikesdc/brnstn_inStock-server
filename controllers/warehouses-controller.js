@@ -79,11 +79,14 @@ const deleteWarehouse = (req, res) => {
   knex("warehouses")
     .where({ id: req.params.warehouse_id })
     .del()
-    .then(() => {
-      res.status(204);
+    .then((data) => {
+      if (data === null) {
+        return res.status(404);
+      }
+      res.status(204).send();
     })
     .catch((err) => {
-      res.status(404);
+      res.status(500);
     })
 }
 
