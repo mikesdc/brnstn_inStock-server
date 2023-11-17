@@ -1,6 +1,7 @@
 const fs = require("fs");
 const router = require("express").Router();
 const warehousesController = require("../controllers/warehouses-controller");
+const { v4: uuidv4 } = require('uuid');
 
 //routes
 
