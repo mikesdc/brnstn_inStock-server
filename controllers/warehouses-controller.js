@@ -19,26 +19,28 @@ const index = (_req, res) => {
 const singleWarehouse = (req, res) => {
   //Warehouse data knex query
   knex('warehouses')
-  .where({ id: req.params.warehouse_id })
-  .then((warehousesFound) => {
+    .where({ id: req.params.warehouse_id })
+    .then((warehousesFound) => {
 
-    //If warehouse not found
-    if(warehousesFound.length === 0) {
-      return res
-      .status(404)
-      .json({message: `Cannot find warehouse with id: ${req.params.warehouse_id}`})
-    }
+      //If warehouse not found
+      if (warehousesFound.length === 0) {
+        return res
+          .status(404)
+          .json({ message: `Cannot find warehouse with id: ${req.params.warehouse_id}` })
+      }
 
-    //Response 200
-    res.status(200).json(warehousesFound[0]);
-  })
+      //Response 200
+      res.status(200).json(warehousesFound[0]);
+    })
 
-  //Catching errors, Gotta catch em all 🐉
-  .catch((error) => {
-    res.status(500)
-    .json({message: `Unable to retrieve data for warehouse: ${req.params.warehouse_id} 
-    failed with error: ${error}`})
-  });
+    //Catching errors, Gotta catch em all 🐉
+    .catch((error) => {
+      res.status(500)
+        .json({
+          message: `Unable to retrieve data for warehouse: ${req.params.warehouse_id} 
+    failed with error: ${error}`
+        })
+    });
 }
 
 /**
@@ -49,38 +51,40 @@ const singleWarehouse = (req, res) => {
  */
 const singleWarehouseInventory = (req, res) => {
   knex('inventories')
-  .where({warehouse_id: req.params.warehouse_id})
-  .then((inventoryFound) => {
+    .where({ warehouse_id: req.params.warehouse_id })
+    .then((inventoryFound) => {
 
-    //If inventory not found
-    if(inventoryFound === 0) {
-      return res
-      .status(404)
-      .json({message: `Cannot find inventory for warehouse id: ${req.params.warehouse_id}`})
-    }
+      //If inventory not found
+      if (inventoryFound === 0) {
+        return res
+          .status(404)
+          .json({ message: `Cannot find inventory for warehouse id: ${req.params.warehouse_id}` })
+      }
 
-    //Response 200
-    res.status(200).json(inventoryFound);
-  })
+      //Response 200
+      res.status(200).json(inventoryFound);
+    })
 
-  //Catching errors, Gotta catch em all 🐉
-  .catch((error) => {
-    res.status(500)
-    .json({message: `Unable to retrieve data for warehouse: ${req.params.warehouse_id} 
-    failed with error: ${error}`})
-  })
+    //Catching errors, Gotta catch em all 🐉
+    .catch((error) => {
+      res.status(500)
+        .json({
+          message: `Unable to retrieve data for warehouse: ${req.params.warehouse_id} 
+    failed with error: ${error}`
+        })
+    })
 }
 
 const deleteWarehouse = (req, res) => {
   knex("warehouses")
-    .where({ id: req.params.id })
+    .where({ id: req.params.warehouse_id })
     .del()
-    .then(data => {
-      res.sendStatus(204);
+    .then(() => {
+      res.status(204);
     })
-    .catch(() =>
-      res.status(404)
-    );
+    .catch((err) => {
+      res.status(404);
+    })
 }
 
 
