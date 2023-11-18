@@ -11,9 +11,11 @@ router.route("/:warehouse_id").get(warehousesController.singleWarehouse);
 
 router.route("/:warehouse_id/inventories").get(warehousesController.singleWarehouseInventory);
 
-router.post("/", warehousesController.createWarehouse);
+router.route("/").post(warehousesController.createWarehouse);
 
-router.put('/:id', warehousesController.updateWarehouse);
+router.route("/:id").put(warehousesController.updateWarehouse);
+
+
 
 
 module.exports = router;
