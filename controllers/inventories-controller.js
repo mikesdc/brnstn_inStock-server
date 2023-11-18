@@ -50,7 +50,23 @@ const singleInventoryItem = (req, res) => {
     })
 }
 
+const deleteInventoryItem = (req, res) => {
+  knex("inventories")
+    .where({ id: req.params.id })
+    .del()
+    .then((data) => {
+      if (data === null) {
+        return res.status(404);
+      }
+      res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(500);
+    })
+}
+
 module.exports = {
   index,
-  singleInventoryItem
+  singleInventoryItem,
+  deleteInventoryItem
 }
