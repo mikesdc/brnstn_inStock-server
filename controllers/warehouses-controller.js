@@ -72,8 +72,72 @@ const singleWarehouseInventory = (req, res) => {
 }
 
 
+// add new warehouse (POST)
+const createWarehouse = (req, res) => {
+
+  // regex phone number validation
+const regexPhone = new RegExp(
+	/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+	'im'
+);
+// regex email validation
+const regexEmail = new RegExp(
+	/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+	'i'
+);
+
+// destructuring the request body
+  const {
+      warehouse_name,
+      address,
+      city,
+      country,
+      contact_name,
+      contact_position,
+      contact_phone,
+      contact_email
+  } = req.body;
+
+  // Validation: Check if all fields are filled
+  if (!warehouse_name || !address || !city || !country || !contact_name || !contact_position || !contact_phone || !contact_email) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  // Validate phone number and email
+  if (!regexPhone.test(contact_phone) || !regexEmail.test(contact_email)) {
+      return res.status(400).json({ message: "Invalid phone number or email address" });
+  }
+
+  // insert data into database usign knex
+  knex('warehouses').insert({
+    warehouse_name,
+    address,
+    city,
+    country,
+    contact_name,
+    contact_position,
+    contact_phone,
+    contact_email
+  })
+
+  // .returning('id') method --> after insertion, tells Knex to return the value of the id column of the new row.
+  .returning('id')
+    .then(([newWarehouseId]) => {
+        return knex('warehouses').where({ id: newWarehouseId }).first();
+    })
+
+    .then(newWarehouse => {
+        res.status(201).json(newWarehouse);
+    })
+
+    .catch(error => {
+        res.status(500).json({ message: `Server error: ${error.message}` });
+    });
+};
+
 module.exports = {
   index,
   singleWarehouse,
-  singleWarehouseInventory
+  singleWarehouseInventory,
+  createWarehouse
 }
