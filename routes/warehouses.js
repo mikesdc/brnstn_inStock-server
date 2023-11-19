@@ -17,5 +17,6 @@ router.route("/:id").put(warehousesController.updateWarehouse);
 
 
 
+router.route("/:warehouse_id").delete(warehousesController.deleteWarehouse);
 
 module.exports = router;
