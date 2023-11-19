@@ -13,7 +13,7 @@ router.route("/:warehouse_id/inventories").get(warehousesController.singleWareho
 
 router.route("/").post(warehousesController.createWarehouse);
 
-router.route("/:id").put(warehousesController.updateWarehouse);
+router.route("/:warehouse_id").put(warehousesController.updateWarehouse);
 
 
 
