@@ -184,13 +184,6 @@ const updateWarehouse = (req, res) => {
     'i'
   );
 
-	if (!regexPhone.test(contact_phone)) {
-    return res.status(400).json({ message: 'Invalid phone number' });
-  }
-  if (!regexEmail.test(contact_email)) {
-    return res.status(400).json({ message: 'Invalid email address' });
-  }
-
   // start a query to interact with the 'warehouses' table in the database
   knex('warehouses')
     // locate warehouse row where 'id' column === 'warehouseId'
@@ -211,7 +204,8 @@ const updateWarehouse = (req, res) => {
       if (updateCount) {
         // if altered rows >=1, send updated warehouse details from  database back to client
         return knex('warehouses').where({ id: warehouseId }).first();
-      } else {
+      } 
+			else {
         // if no rows updated (aka warehouse not found), send  404 error
         res
           .status(404)
