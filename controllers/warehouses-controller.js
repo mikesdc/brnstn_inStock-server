@@ -156,9 +156,9 @@ const createWarehouse = (req, res) => {
     });
 };
 
-// ---------- EDIT WAREHOUSE (PUT) ----------
+// ---------- UPDATE WAREHOUSE (PUT/EDIT) ----------
 const updateWarehouse = (req, res) => {
-  const warehouseId = req.params.id;
+  const warehouseId = req.params.warehouse_id; 
 
   // destructuring the request body
   const {
@@ -183,6 +183,13 @@ const updateWarehouse = (req, res) => {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     'i'
   );
+
+	if (!regexPhone.test(contact_phone)) {
+    return res.status(400).json({ message: 'Invalid phone number' });
+  }
+  if (!regexEmail.test(contact_email)) {
+    return res.status(400).json({ message: 'Invalid email address' });
+  }
 
   // start a query to interact with the 'warehouses' table in the database
   knex('warehouses')
