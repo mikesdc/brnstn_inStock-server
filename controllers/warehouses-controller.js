@@ -146,6 +146,7 @@ const createWarehouse = (req, res) => {
 	.catch((error) => {
 		res.status(500).json({ message: `Server error: ${error.message}` });
 	});
+
 };
 
 // ---------- UPDATE WAREHOUSE (PUT/EDIT) ----------
