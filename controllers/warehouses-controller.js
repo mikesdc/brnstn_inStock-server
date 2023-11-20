@@ -124,22 +124,7 @@ const createWarehouse = (req, res) => {
     contact_position,
     contact_phone,
     contact_email,
-  });
-  knex('inventories')
-    .where({ warehouse_id: req.params.warehouse_id })
-    .then((inventoryFound) => {
-      //If inventory not found
-      if (inventoryFound === 0) {
-        return res
-          .status(404)
-          .json({
-            message: `Cannot find inventory for warehouse id: ${req.params.warehouse_id}`,
-          });
-      }
-
-      //Response 200
-      res.status(200).json(inventoryFound);
-    })
+  })
 
     // .returning('id') method --> after insertion, tells Knex to return the value of the id column of the new row.
     .returning('id')
