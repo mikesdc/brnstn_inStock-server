@@ -124,7 +124,7 @@ const createWarehouse = (req, res) => {
     contact_position,
     contact_phone,
     contact_email,
-  });
+  })
 
     // .returning('id') method --> after insertion, tells Knex to return the value of the id column of the new row.
     .returning('id')
