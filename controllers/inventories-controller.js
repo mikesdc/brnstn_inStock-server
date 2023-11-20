@@ -107,6 +107,8 @@ const createInventoryItem = (req, res) => {
 // ---------- UPDATE INVENTORY ITEM (PUT/EDIT) ----------
 
 const updateInventoryItem = (req, res) => {
+  const itemId = req.params.id;
+
   // validating data
   if (
     !req.body.warehouse_id ||
@@ -129,7 +131,7 @@ const updateInventoryItem = (req, res) => {
 
   // insert data into database usign knex
   knex('inventories')
-    .where({ id: req.params.id })
+    .where({ id: itemId })
     .update({
       warehouse_id,
       item_name,
