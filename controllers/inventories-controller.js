@@ -31,11 +31,9 @@ const singleInventoryItem = (req, res) => {
     .then((itemFound) => {
       // If item not found
       if (itemFound.length === 0) {
-        return res
-          .status(500)
-          .json({
-            message: `Cannot find inventory item with id: ${req.params.id}`,
-          });
+        return res.status(500).json({
+          message: `Cannot find inventory item with id: ${req.params.id}`,
+        });
       }
 
       // Response 200
@@ -109,25 +107,45 @@ const createInventoryItem = (req, res) => {
 // ---------- UPDATE INVENTORY ITEM (PUT/EDIT) ----------
 
 const updateInventoryItem = (req, res) => {
-  // Response returns 404 if inventory ID is not found or quantity is NaN
-  if (!warehouse_id || typeof quantity !== 'number') {
-    return res.status(400).send('Invalid request data');
+  // validating data
+  if (
+    !req.body.warehouse_id ||
+    !req.body.item_name ||
+    !req.body.description ||
+    !req.body.category ||
+    !req.body.status ||
+    !req.body.quantity
+  ) {
+    return res
+      .status(400)
+      .send(
+        'Please make sure to provide Warehouse,item name, description, category, status and quantity fields.'
+      );
   }
+
+  // destructuring the request body
+  const { warehouse_id, item_name, description, category, status, quantity } =
+    req.body;
+
+  // insert data into database usign knex
   knex('inventories')
-    .update(req.body)
     .where({ id: req.params.id })
-    .then((_data) => {
-      knex('inventories')
-        .where({ id: req.params.id })
-        .then((data) => {
-          res.status(200).json(data[0]);
-        });
+    .update({
+      warehouse_id,
+      item_name,
+      description,
+      category,
+      status,
+      quantity,
     })
-    .catch((err) =>
+    .then(() => {
+      res.status(201).json({ message: 'Inventory item updated successfully.' });
+    })
+    .catch((err) => {
       res
-        .status(400)
-        .send(`Error Updating Inventory Item ${req.params.id} ${err}`)
-    );
+        .status(500)
+        .json({ message: `Error updating inventory item: ${err}` });
+    });
 };
 
 module.exports = {

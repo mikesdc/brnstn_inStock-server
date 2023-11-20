@@ -12,7 +12,7 @@ router.route("/:id").delete(inventoriesController.deleteInventoryItem);
 
 router.route("/").post(inventoriesController.createInventoryItem);
 
-
+router.route("/").put(inventoriesController.createInventoryItem);
 
 
 module.exports = router;
