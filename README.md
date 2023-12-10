@@ -26,3 +26,14 @@ https://web.archive.org/web/20230330012035/https://gitsheet.wtf/
 
 ### Credits Arjun
 
+To set up databases locally:
+1. Clone the server repo.
+2. Install dependencies
+3. On your MySQL server: `CREATE DATABASE instockmp2;`
+4. On VSCode/terminal: `npx knex migrate:latest`
+5. On VSCode/terminal: `npx knex seed:run`
+
+Test if server is working:
+1. VSCode/terminal: `nodemon server.js`
+2. Browser: `localhost:8080/warehouses`
+3. Browser: `localhost:8080/inventories`
